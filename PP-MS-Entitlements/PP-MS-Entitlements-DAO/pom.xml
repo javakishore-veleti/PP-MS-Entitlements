@@ -11,4 +11,16 @@
 	<artifactId>PP-MS-Entitlements-DAO</artifactId>
 	<packaging>jar</packaging>
 	<name>PP-MS-Entitlements-DAO</name>
+	<dependencies>
+		<dependency>
+			<groupId>jk.provider.portal.platform.servers</groupId>
+			<artifactId>PP-MS-Entitlements-Domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>jk.provider.portal.ms.commons</groupId>
+			<artifactId>PP-MS-Commons-Libs</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 </project>
