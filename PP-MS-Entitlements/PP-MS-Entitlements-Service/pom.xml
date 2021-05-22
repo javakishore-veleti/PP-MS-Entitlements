@@ -11,4 +11,30 @@
 	<artifactId>PP-MS-Entitlements-Service</artifactId>
 	<packaging>jar</packaging>
 	<name>PP-MS-Entitlements-Service</name>
+	<dependencies>
+		<dependency>
+			<groupId>jk.provider.portal.engineering.foundations</groupId>
+			<artifactId>PP-Engg-Common-Service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jk.provider.portal.platform.servers</groupId>
+			<artifactId>PP-MS-Entitlements-DAO</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>jk.provider.portal.engineering.foundations</groupId>
+			<artifactId>PP-Engg-Common-Core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jk.provider.portal.engineering.foundations</groupId>
+			<artifactId>PP-Engg-Common-Domain</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 </project>
