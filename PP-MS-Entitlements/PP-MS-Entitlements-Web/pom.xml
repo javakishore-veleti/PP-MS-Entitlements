@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>PP-MS-Entitlements</artifactId>
+		<groupId>jk.provider.portal.platform.servers</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>PP-MS-Entitlements-Web</artifactId>
+	<packaging>jar</packaging>
+	<name>PP-MS-Entitlements-Web</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>jk.provider.portal.engineering.foundations</groupId> -->
+		<!-- <artifactId>PP-Engg-Common-Core</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>jk.provider.portal.engineering.foundations</groupId> -->
+		<!-- <artifactId>PP-Engg-Common-Domain</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>jk.provider.portal.engineering.foundations</groupId> -->
+		<!-- <artifactId>PP-Engg-Common-DAO</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>jk.provider.portal.engineering.foundations</groupId> -->
+		<!-- <artifactId>PP-Engg-Common-Service</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>jk.provider.portal.engineering.foundations</groupId>
+			<artifactId>PP-Engg-Common-Controller</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jk.provider.portal.platform.servers</groupId>
+			<artifactId>PP-MS-Entitlements-Service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>jk.provider.portal.ms.commons</groupId>
+			<artifactId>PP-MS-Commons-Libs</artifactId>
+		</dependency>
+	</dependencies>
+</project>
