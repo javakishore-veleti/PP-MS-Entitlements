@@ -12,7 +12,10 @@ Below is a very good article
 - https://spring.io/guides/gs/spring-boot-docker/
 
 ```sh
+
 ./docker-build.sh
-docker run -p 8080:8080 -t provider-portal/ms-entitlements
+./docker-run.sh
+./docker-stop.sh
+./docker-remove.sh
 
 ```
