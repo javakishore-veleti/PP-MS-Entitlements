@@ -12,7 +12,7 @@ import jk.pp.ms.commons.configs.MSType;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "jk.pp.ms.entitlements.domain", "jk.pp.ms.entitlements.dao",
-		"jk.pp.ms.entitlements.service" })
+		"jk.pp.ms.entitlements.service", "jk.pp.ms.entitlements.web" })
 @EntityScan(basePackages = { "jk.pp.ms.entitlements.domain", "jk.pp.engg.foundations.common.domain.core.entitlements" })
 @EnableJpaRepositories(basePackages = { "jk.pp.ms.entitlements.dao" })
 @Import(value = { MSCommonGlobalConfig.class })

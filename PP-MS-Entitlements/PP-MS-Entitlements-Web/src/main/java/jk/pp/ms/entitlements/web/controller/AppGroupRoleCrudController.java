@@ -10,7 +10,7 @@ import jk.pp.engg.foundations.common.domain.core.entitlements.AppGroupRoleCrudDT
 import jk.pp.ms.entitlements.service.AppGroupRoleCrudService;
 
 @RestController
-@RequestMapping(name = "/api/services/entitlements/appgrouprole/crud", produces = "application/json")
+@RequestMapping(path = "/api/services/entitlements/appgrouprole/crud", produces = "application/json")
 public class AppGroupRoleCrudController extends AppCrudController<AppGroupRole, AppGroupRoleCrudDTO> {
 
 	@Autowired
