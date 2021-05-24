@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>PP-MS-Entitlements</artifactId>
+		<groupId>jk.provider.portal.platform.servers</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>PP-MS-Entitlements-DevOps</artifactId>
+	<packaging>jar</packaging>
+	<name>PP-MS-Entitlements-DevOps</name>
+	<properties>
+		<docker.image.prefix>provider-proposal</docker.image.prefix>
+		<docker.image.name>ms-entitlements-maven</docker.image.name>
+		<project.build.finalName>PP-MS-Entitlements-Docker</project.build.finalName>
+		<artifact.extension>jar</artifact.extension>
+		<docker.image.workdir>/provider-portal</docker.image.workdir>
+		<docker.build.cmd>${docker.image.workdir}/${project.name}-${project.version}.jar</docker.build.cmd>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>jk.provider.portal.platform.servers</groupId>
+			<artifactId>PP-MS-Entitlements-Web</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>jk.pp.ms.entitlements.web.EntitlementsWebMain</mainClass>
+					<!-- <layout>LAYERED_JAR</layout> -->
+					<layers>
+						<enabled>true</enabled>
+					</layers>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<!-- https://discuss.circleci.com/t/cant-connect-to-docker-containers-started-by-fabric8-docker-maven-plugin-during-ci-cd/35783 -->
+					<!-- <sourceDirectory>.</sourceDirectory> -->
+					<autoCreateCustomNetworks>true</autoCreateCustomNetworks>
+					<removeAll>true</removeAll>
+					<showLogs>true</showLogs>
+					<images>
+						<image>
+							<name>${docker.image.prefix}/${docker.image.name}</name>
+							<build>
+								<!-- <from>openjdk:latest</from> -->
+								<from>adoptopenjdk/openjdk11:latest</from>
+								<cmd>java -jar ${docker.build.cmd}</cmd>
+								<!-- <contextDir>.</contextDir> -->
+								<!-- <dockerFileDir>${project.basedir}</dockerFileDir> -->
+								<assemblies>
+									<assembly>
+										<name>deps-release</name>
+										<descriptorRef>release-dependencies</descriptorRef>
+										<targetDir>${docker.image.workdir}/lib</targetDir>
+									</assembly>
+									<assembly>
+										<name>deps-snapshot</name>
+										<descriptorRef>snapshot-dependencies</descriptorRef>
+										<targetDir>${docker.image.workdir}/lib</targetDir>
+									</assembly>
+									<assembly>
+										<name>deps-artifact</name>
+										<descriptorRef>artifact</descriptorRef>
+										<targetDir>${docker.image.workdir}</targetDir>
+									</assembly>
+									<assembly>
+										<name>deps-artifact-with-dependencies</name>
+										<descriptorRef>artifact-with-dependencies</descriptorRef>
+										<targetDir>${docker.image.workdir}</targetDir>
+									</assembly>
+								</assemblies>
+								<tags>
+									<tag>latest</tag>
+									<!-- <tag>${project.version}</tag> -->
+								</tags>
+								<ports>
+									<port>8080</port>
+									<port>6100</port>
+								</ports>
+								<runCmds>
+									<run>groupadd -r providerportaluser</run>
+									<run>useradd -r -g providerportaluser providerportaluser</run>
+								</runCmds>
+							</build>
+						</image>
+					</images>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+							<!-- <goal>push</goal> -->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

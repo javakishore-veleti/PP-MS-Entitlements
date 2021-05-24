@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pp-ms-entitlements-web
+  labels:
+    app: pp-ms-entitlements-web
+    department: entitlements
+spec:
+  selector:
+    matchLabels:
+      app: pp-ms-entitlements-web
+      department: entitlements
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: pp-ms-entitlements-web
+        department: entitlements
+    spec:
+      containers:
+      - name: pp-ms-entitlements-web
+        image: "provider-proposal/ms-entitlements-maven"
+        imagePullPolicy: Never
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 6100
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 10
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 6100
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 10
+        ports:
+        - containerPort: 6100

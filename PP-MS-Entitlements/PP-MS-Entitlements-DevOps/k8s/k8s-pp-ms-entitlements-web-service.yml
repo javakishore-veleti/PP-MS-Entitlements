@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pp-ms-entitlements-web
+  labels:
+    app: pp-ms-entitlements-web
+    department: entitlements
+spec:
+  type: ClusterIP
+  selector:
+    app: pp-ms-entitlements-web
+    department: entitlements
+  ports:
+  - protocol: TCP
+    port: 6100
+    targetPort: 6100

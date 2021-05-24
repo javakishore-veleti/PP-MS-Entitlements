@@ -94,5 +94,6 @@
 		<module>PP-MS-Entitlements-DAO</module>
 		<module>PP-MS-Entitlements-Service</module>
 		<module>PP-MS-Entitlements-Web</module>
+		<module>PP-MS-Entitlements-DevOps</module>
 	</modules>
 </project>
