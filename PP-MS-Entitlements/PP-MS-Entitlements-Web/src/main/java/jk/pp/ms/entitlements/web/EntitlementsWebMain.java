@@ -3,10 +3,12 @@ package jk.pp.ms.entitlements.web;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import jk.pp.engg.foundations.common.core.util.AppGlobalObjects;
 import jk.pp.ms.commons.configs.MSCommonGlobalConfig;
 import jk.pp.ms.commons.configs.MSType;
 
@@ -23,7 +25,9 @@ public class EntitlementsWebMain {
 		SpringApplication app = new SpringApplication(EntitlementsWebMain.class);
 		app.setAdditionalProfiles(MSCommonGlobalConfig.buildAMSStartupProfiles(MSType.ENTITLEMENTS));
 
-		app.run(args);
+		ApplicationContext ctx = app.run(args);
+
+		ctx.getBean(AppGlobalObjects.class).invokeConsumerInitHandlers();
 	}
 
 }
